@@ -1,0 +1,1211 @@
+{% extends 'main/base.html' %} {% load static i18n %}
+
+<!-- prettier-ignore -->
+{% block title %}
+{% trans "Home | Silam Al-Wusool" %}
+{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+  <!-- =========================================================
+    HERO
+  ========================================================= -->
+  <section class="hero-landing position-relative overflow-hidden">
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="container-full">
+      <div class="row align-items-center min-vh-100 py-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <!-- prettier-ignore -->
+          <h1 class="display-3 fw-bold mb-4 text-white">
+            {% blocktrans %}Premium Building Materials for Your Projects{% endblocktrans %}
+          </h1>
+
+          <p class="lead mb-5 hero-subtitle">
+            {% blocktrans %}Top-quality construction supplies imported from
+            world-leading manufacturers. Trusted by contractors and builders
+            across Libya.{% endblocktrans %}
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <a href="#products" class="btn btn-primary-modern btn-lg px-5">
+              <i class="fas fa-hard-hat mx-2" aria-hidden="true"></i>
+              {% trans "View Materials" %}
+            </a>
+
+            <a
+              href="{% url 'contact' %}"
+              class="btn btn-outline-light btn-lg px-5"
+            >
+              <i class="fas fa-headset mx-2" aria-hidden="true"></i>
+              {% trans "Get a Quote" %}
+            </a>
+          </div>
+
+          <div class="d-flex flex-wrap gap-4 hero-badges" role="list">
+            <div class="d-flex align-items-center" role="listitem">
+              <div class="avatar bg-primary p-2 mx-3">
+                <i class="fas fa-check-circle" aria-hidden="true"></i>
+              </div>
+              <span>{% trans "International Standards" %}</span>
+            </div>
+
+            <div class="d-flex align-items-center" role="listitem">
+              <div class="avatar bg-primary p-2 mx-3">
+                <i class="fas fa-truck-loading" aria-hidden="true"></i>
+              </div>
+              <span>{% trans "Reliable Logistics" %}</span>
+            </div>
+
+            <div class="d-flex align-items-center" role="listitem">
+              <div class="avatar bg-primary p-2 mx-3">
+                <i class="fas fa-users-cog" aria-hidden="true"></i>
+              </div>
+              <span>{% trans "Expert Consultation" %}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="text-center">
+            <img
+              src="{% static 'main/img/sollam-alwosoul-logo.png' %}"
+              alt="{% trans 'Premium Building Materials' %}"
+              class="img-fluid hero-materials-img"
+              loading="eager"
+              decoding="async"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80';
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    BANNERS (FULL WIDTH SLIDER + MANUAL CONTROLS)
+  ========================================================= -->
+  <section class="pb-5 px-0">
+    <!-- full width -->
+    <div class="container-fluid px-0">
+      <div
+        id="bannersCarousel"
+        class="carousel slide banners-carousel"
+        data-bs-ride="carousel"
+        data-bs-interval="5000"
+        data-bs-pause="hover"
+        data-bs-touch="true"
+        data-bs-wrap="true"
+      >
+        <!-- indicators -->
+        <div class="carousel-indicators" id="bannersIndicators"></div>
+
+        <!-- slides -->
+        <div class="carousel-inner" id="bannersContainer" aria-live="polite">
+          <!-- Skeleton -->
+          <div class="carousel-item active">
+            <div class="banner-slide">
+              <div class="skeleton w-100 h-100" style="min-height: 500px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- arrows -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#bannersCarousel"
+          data-bs-slide="prev"
+          aria-label="{% trans 'Previous' %}"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#bannersCarousel"
+          data-bs-slide="next"
+          aria-label="{% trans 'Next' %}"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <!-- Extra manual buttons (optional UI) -->
+      <div
+        id="bannerManualControls"
+        class="d-flex justify-content-center gap-2 mt-3 px-3"
+        style="display: none !important"
+      >
+        <!-- prettier-ignore -->
+        <button
+          id="bannerPrevBtn"
+          class="btn btn-outline-secondary btn-sm"
+          type="button"
+        >
+          <i class="fas fa-chevron-left mx-1" aria-hidden="true"></i> {% trans "Previous" %}
+        </button>
+
+        <button
+          id="bannerNextBtn"
+          class="btn btn-outline-secondary btn-sm"
+          type="button"
+        >
+          {% trans "Next" %}
+          <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+  PHOTO GALLERY
+========================================================= -->
+  <section id="gallery" class="py-5 px-5 bg-dynamic">
+    <div class="container-full">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold mb-3">{% trans "Project Gallery" %}</h2>
+        <!-- prettier-ignore -->
+        <p class="lead text-muted">
+        {% blocktrans %}Explore our latest construction and material supply projects{% endblocktrans %}
+      </p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="row g-4" id="galleryContainer">
+        <!-- Gallery Image 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?q=80&w=479&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Construction Site' %}"
+            />
+          </div>
+        </div>
+
+        <!-- Gallery Image 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1580810734915-93a368ed2073?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Steel Materials' %}"
+            />
+          </div>
+        </div>
+
+        <!-- Gallery Image 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=800"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Cement and Concrete' %}"
+            />
+          </div>
+        </div>
+
+        <!-- Gallery Image 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?auto=format&fit=crop&q=80&w=800"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Timber' %}"
+            />
+          </div>
+        </div>
+
+        <!-- Gallery Image 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Architecture' %}"
+            />
+          </div>
+        </div>
+
+        <!-- Gallery Image 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div
+            class="card border-0 shadow-sm overflow-hidden h-100 gallery-card"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1575281923032-f40d94ef6160?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="img-fluid gallery-img"
+              alt="{% trans 'Finishing Materials' %}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    CATEGORIES
+  ========================================================= -->
+  <section class="py-5 px-5 d-none">
+    <div class="container-full">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold mb-3">{% trans "Shop by Category" %}</h2>
+        <!-- prettier-ignore -->
+        <p class="lead text-muted">
+          {% blocktrans %}Everything your construction project needs{% endblocktrans %}
+        </p>
+      </div>
+
+      <div class="row g-4" id="categoriesContainer" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    WHY CHOOSE US
+  ========================================================= -->
+  <section class="py-5 px-5 bg-dynamic text-white">
+    <div class="container-full">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold mb-3">
+          {% trans "Why Choose Silam Al-Wusool?" %}
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="text-center p-4">
+            <div
+              class="feature-icon bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i class="fas fa-certificate fa-2x" aria-hidden="true"></i>
+            </div>
+            <h4>{% trans "Certified Quality" %}</h4>
+            <!-- prettier-ignore -->
+            <p>
+              {% trans "All materials meet strict global construction and safety standards." %}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-center p-4">
+            <div
+              class="feature-icon bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i class="fas fa-truck-monster fa-2x" aria-hidden="true"></i>
+            </div>
+            <h4>{% trans "Site Delivery" %}</h4>
+            <!-- prettier-ignore -->
+            <p>
+              {% trans "Reliable transportation and delivery directly to your worksite." %}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-center p-4">
+            <div
+              class="feature-icon bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i class="fas fa-hard-hat fa-2x" aria-hidden="true"></i>
+            </div>
+            <h4>{% trans "Industry Expertise" %}</h4>
+            <!-- prettier-ignore -->
+            <p>
+              {% trans "Consultation and sourcing advice from experienced import professionals." %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    BRANDS
+  ========================================================= -->
+  <section class="py-5 px-5">
+    <div class="container-full">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold mb-3">
+          {% trans "Trusted Manufacturers" %}
+        </h2>
+        <!-- prettier-ignore -->
+        <p class="lead text-muted">
+          {% blocktrans %}Premium materials sourced from world-renowned factories{% endblocktrans %}
+        </p>
+      </div>
+
+      <div
+        class="row g-4 justify-content-center"
+        id="brandsContainer"
+        aria-live="polite"
+      ></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    CTA
+  ========================================================= -->
+  <section class="py-5 px-5 bg-primary text-white">
+    <div class="container-full">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h2 class="display-6 fw-bold mb-3">
+            {% trans "Need Help Sourcing the Right Materials?" %}
+          </h2>
+          <!-- prettier-ignore -->
+          <p class="lead mb-0">
+            {% trans "Our procurement experts are ready to help you select the perfect supplies for your next big project." %}
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5">
+            <i class="fas fa-envelope-open-text mx-2" aria-hidden="true"></i>
+            {% trans "Contact Us" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .gallery-card {
+    border-radius: 0.75rem;
+    cursor: pointer;
+  }
+
+  .gallery-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    min-height: 250px;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .gallery-card:hover .gallery-img {
+    transform: scale(1.08);
+  }
+  .landing-page {
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero-landing {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-light) 100%
+    );
+    color: #fff;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 2rem 6rem;
+    isolation: isolate;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(255, 255, 255, 0.12),
+        transparent 45%
+      ),
+      rgba(0, 0, 0, 0.35);
+    z-index: 0;
+  }
+  .hero-landing .container-full {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-subtitle {
+    max-width: 55ch;
+  }
+
+  .hero-oil-img {
+    max-height: 500px;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-oil-img {
+      animation: none;
+    }
+    [data-aos] {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+
+  /* Shared cards */
+  .card-elev {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+    background: #fff;
+    height: 100%;
+  }
+  .card-elev:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Products */
+  .product-img {
+    height: 200px;
+    object-fit: contain;
+    padding: 1rem;
+    background: #f8f9fa;
+  }
+  .product-price {
+    color: #1a73e8;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* Avatar */
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Categories */
+  .category-card {
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 210px;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+    background: #fff;
+  }
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  .category-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .category-card:hover .category-img {
+    transform: scale(1.05);
+  }
+  .category-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    color: #fff;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0.05)
+    );
+  }
+
+  /* Brands */
+  .brand-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+    height: 120px;
+  }
+  .brand-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  .brand-img {
+    max-height: 60px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* Skeleton loaders */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06),
+      rgba(0, 0, 0, 0.12),
+      rgba(0, 0, 0, 0.06)
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.1s infinite;
+    border-radius: 10px;
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  .sk-img {
+    height: 200px;
+  }
+  .sk-line {
+    height: 14px;
+    margin: 10px 0;
+  }
+  .sk-line.sm {
+    height: 12px;
+    width: 70%;
+  }
+  .sk-btn {
+    height: 34px;
+    width: 90px;
+    border-radius: 8px;
+  }
+
+  footer {
+    margin-top: 0px !important;
+  }
+  .main-content {
+    padding-bottom: 0px !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-landing {
+      min-height: auto;
+      padding: 4rem 1rem;
+    }
+    .hero-oil-img {
+      max-height: 300px;
+      margin-top: 2rem;
+    }
+    .display-3 {
+      font-size: 2.4rem;
+    }
+    .display-5 {
+      font-size: 2rem;
+    }
+    .display-6 {
+      font-size: 1.7rem;
+    }
+  }
+
+  /* BANNERS (true full width) */
+  .banners-carousel {
+    overflow: hidden;
+  }
+  .banners-carousel .carousel-inner {
+    overflow: hidden;
+  }
+  .banner-slide {
+    position: relative;
+    overflow: hidden;
+    min-height: 700px;
+    background: #0b1220;
+  }
+  .banner-slide .banner-media {
+    position: absolute;
+    inset: 0;
+  }
+  .banner-slide .banner-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .banner-slide .banner-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.25) 55%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+  .banner-slide.light .banner-scrim {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.35) 55%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  }
+
+  .banner-slide .banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 34px;
+    max-width: 760px;
+  }
+  .banner-slide .banner-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin: 0 0 10px;
+    line-height: 1.15;
+  }
+  .banner-slide .banner-subtitle {
+    margin: 0 0 18px;
+    opacity: 0.92;
+  }
+
+  /* make content align with your site padding while slide remains full-width */
+  .banner-inner {
+    width: min(1320px, 100%);
+    margin-inline: auto;
+    padding-inline: 24px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  @media (max-width: 992px) {
+    .banner-slide {
+      min-height: 260px;
+    }
+    .banner-slide .banner-content {
+      max-width: 92%;
+      padding: 22px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // AOS
+    if (window.AOS) {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        disable: window.innerWidth < 768,
+      });
+    }
+
+    const API_URL = "{% url 'api-home-data' %}";
+    const CACHE_KEY = "homeDataCache:v1";
+    const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+    renderSkeletons();
+    loadLandingData();
+
+    function renderSkeletons() {
+      const products = document.getElementById("productsContainer");
+      const categories = document.getElementById("categoriesContainer");
+      const brands = document.getElementById("brandsContainer");
+
+      if (products) {
+        products.innerHTML = Array.from({ length: 8 })
+          .map(
+            () => `
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="card-elev">
+                <div class="skeleton sk-img w-100"></div>
+                <div class="p-3">
+                  <div class="skeleton sk-line w-75"></div>
+                  <div class="skeleton sk-line sm"></div>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="skeleton sk-line" style="width:80px; margin:0;"></div>
+                    <div class="skeleton sk-btn"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `,
+          )
+          .join("");
+      }
+
+      if (categories) {
+        categories.innerHTML = Array.from({ length: 6 })
+          .map(
+            () => `
+            <div class="col-lg-4 col-md-6">
+              <div class="category-card">
+                <div class="skeleton w-100 h-100"></div>
+              </div>
+            </div>
+          `,
+          )
+          .join("");
+      }
+
+      if (brands) {
+        brands.innerHTML = Array.from({ length: 12 })
+          .map(
+            () => `
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="brand-card">
+                <div class="skeleton" style="height:40px; width:110px;"></div>
+              </div>
+            </div>
+          `,
+          )
+          .join("");
+      }
+    }
+
+    async function loadLandingData() {
+      try {
+        const data = await getHomeData();
+        renderAll(data);
+      } catch (error) {
+        console.error("Landing load failed:", error);
+        renderFallbacks();
+      }
+    }
+
+    async function getHomeData() {
+      const cached = readCache();
+      if (cached) return cached;
+
+      const response = await fetch(API_URL, {
+        headers: { Accept: "application/json" },
+        credentials: "same-origin",
+      });
+      if (!response.ok) throw new Error("API not available");
+
+      const data = await response.json();
+      writeCache(data);
+      return data;
+    }
+
+    function readCache() {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.ts || !parsed.data) return null;
+        if (Date.now() - parsed.ts > CACHE_TTL_MS) return null;
+        return parsed.data;
+      } catch {
+        return null;
+      }
+    }
+
+    function writeCache(data) {
+      try {
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({ ts: Date.now(), data }),
+        );
+      } catch {}
+    }
+
+    function renderAll(data) {
+      const banners = data && data.banners ? data.banners : [];
+      const products =
+        data && data.featured_products
+          ? data.featured_products.slice(0, 8)
+          : [];
+      const categories =
+        data && data.categories ? data.categories.slice(0, 6) : [];
+      const brands = data && data.brands ? data.brands : [];
+
+      if (banners.length) displayBanners(banners);
+      else hideBanners();
+
+      if (products.length) displayProducts(products);
+      else showSampleProducts();
+
+      if (categories.length) displayCategories(categories);
+      else showSampleCategories();
+
+      if (brands.length) displayBrands(brands);
+      else showSampleBrands();
+    }
+
+    function safeText(v) {
+      return String(v ?? "").replace(
+        /[&<>"']/g,
+        (c) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;",
+          })[c],
+      );
+    }
+
+    function toAbsUrl(url) {
+      if (!url) return "";
+      if (url.startsWith("http://") || url.startsWith("https://")) return url;
+      return new URL(
+        url.startsWith("/") ? url : `/${url}`,
+        window.location.origin,
+      ).toString();
+    }
+
+    /* ==========================
+       BANNERS
+    ========================== */
+    function hideBanners() {
+      const carousel = document.getElementById("bannersCarousel");
+      const manual = document.getElementById("bannerManualControls");
+      if (carousel) carousel.classList.add("d-none");
+      if (manual) manual.classList.add("d-none");
+    }
+
+    function displayBanners(banners) {
+      const container = document.getElementById("bannersContainer");
+      const indicators = document.getElementById("bannersIndicators");
+      const carouselEl = document.getElementById("bannersCarousel");
+      const manualWrap = document.getElementById("bannerManualControls");
+      if (!container || !carouselEl) return;
+
+      const list = (banners || []).filter(
+        (b) => b && (b.is_active === undefined || b.is_active),
+      );
+      if (!list.length) return hideBanners();
+
+      if (indicators) {
+        indicators.innerHTML = list
+          .map(
+            (_, idx) => `
+              <button type="button"
+                data-bs-target="#bannersCarousel"
+                data-bs-slide-to="${idx}"
+                class="${idx === 0 ? "active" : ""}"
+                aria-current="${idx === 0 ? "true" : "false"}"
+                aria-label="Slide ${idx + 1}">
+              </button>
+            `,
+          )
+          .join("");
+      }
+
+      container.innerHTML = list
+        .map((b, idx) => {
+          const title = safeText(b.title || "{% trans 'Special Offer' %}");
+          const subtitle = safeText(b.subtitle || "");
+          const img = b.image ? toAbsUrl(safeText(b.image)) : "";
+          const btnText = safeText(b.button_text || "{% trans 'Learn More' %}");
+          const btnLink = safeText(b.button_link || "");
+          const textColor = (b.text_color || "white").toLowerCase();
+          const isLight = textColor === "dark";
+          const fg = isLight ? "#0b1220" : "#ffffff";
+
+          return `
+            <div class="carousel-item ${idx === 0 ? "active" : ""}">
+              <div class="banner-slide ${isLight ? "light" : ""}">
+                <div class="banner-media">
+                  ${
+                    img
+                      ? `<img src="${img}" alt="${title}" loading="lazy" decoding="async">`
+                      : `<div class="w-100 h-100" style="background:var(--accent-gradient);"></div>`
+                  }
+                </div>
+                <div class="banner-scrim" aria-hidden="true"></div>
+
+                <!--<div class="banner-inner">
+                  <div class="banner-content">
+                    <h3 class="banner-title" style="color:${fg}">${title}</h3>
+                    ${subtitle ? `<p class="banner-subtitle" style="color:${fg}">${subtitle}</p>` : ``}
+                    ${btnLink ? `<a class="btn btn-primary-modern" href="${btnLink}">${btnText}</a>` : ``}
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      const prevBtn = carouselEl.querySelector(".carousel-control-prev");
+      const nextBtn = carouselEl.querySelector(".carousel-control-next");
+      const single = list.length <= 1;
+
+      if (prevBtn) prevBtn.classList.toggle("d-none", single);
+      if (nextBtn) nextBtn.classList.toggle("d-none", single);
+      if (indicators) indicators.classList.toggle("d-none", single);
+      if (manualWrap) manualWrap.classList.toggle("d-none", single);
+
+      // init carousel
+      if (window.bootstrap && window.bootstrap.Carousel) {
+        const existing = window.bootstrap.Carousel.getInstance(carouselEl);
+        if (existing) existing.dispose();
+
+        const instance = new window.bootstrap.Carousel(carouselEl, {
+          interval: single ? false : 5000,
+          ride: single ? false : "carousel",
+          pause: "hover",
+          wrap: true,
+          touch: true,
+        });
+
+        // Manual buttons
+        const prevManual = document.getElementById("bannerPrevBtn");
+        const nextManual = document.getElementById("bannerNextBtn");
+
+        if (prevManual) prevManual.onclick = () => instance.prev();
+        if (nextManual) nextManual.onclick = () => instance.next();
+
+        // Keyboard manual switching
+        carouselEl.setAttribute("tabindex", "0");
+        carouselEl.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") instance.prev();
+          if (e.key === "ArrowRight") instance.next();
+        });
+      }
+    }
+
+    /* ==========================
+       PRODUCTS
+    ========================== */
+    function displayProducts(products) {
+      const container = document.getElementById("productsContainer");
+      if (!container) return;
+
+      container.innerHTML = (products || [])
+        .map((product) => {
+          const name = safeText(product.name || "{% trans 'Engine Oil' %}");
+          const desc = safeText(
+            product.description || "{% trans 'Premium quality' %}",
+          );
+          const image = product.image ? toAbsUrl(safeText(product.image)) : "";
+          const showPrice = !!product.show_price;
+          const price = showPrice ? safeText(product.price) : "";
+          const canBuy = !!product.place_orders;
+
+          return `
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="card-elev">
+                <div class="d-flex align-items-center justify-content-center text-center bg-light">
+                  ${
+                    image
+                      ? `<img src="${image}" alt="${name}" class="img-fluid product-img w-100" loading="lazy" decoding="async">`
+                      : `<div class="py-5"><i class="fas fa-tag text-muted fa-2x" aria-hidden="true"></i></div>`
+                  }
+                </div>
+
+                <div class="p-3">
+                  <h5 class="mb-2">${name}</h5>
+                  <p class="text-muted small mb-2">${desc}</p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="product-price">${showPrice ? `LYD ${price}` : ""}</span>
+                    ${
+                      canBuy
+                        ? `<a href="/products/${safeText(product.id || "")}" class="btn btn-sm btn-primary-modern">
+                            <i class="fas fa-shopping-cart mx-1" aria-hidden="true"></i> {% trans "Buy" %}
+                          </a>`
+                        : ``
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function showSampleProducts() {
+      displayProducts([
+        {
+          name: "5W-30 Synthetic Engine Oil",
+          price: 85,
+          description: "Full synthetic, 4L",
+          show_price: true,
+          place_orders: false,
+        },
+        {
+          name: "10W-40 Mineral Oil",
+          price: 65,
+          description: "Mineral, 4L",
+          show_price: true,
+          place_orders: false,
+        },
+        {
+          name: "Transmission Fluid",
+          price: 120,
+          description: "Automatic transmission",
+          show_price: true,
+          place_orders: false,
+        },
+        {
+          name: "Brake Fluid",
+          price: 45,
+          description: "DOT 4, 500ml",
+          show_price: true,
+          place_orders: false,
+        },
+        {
+          name: "Coolant/Antifreeze",
+          price: 75,
+          description: "Ready to use, 5L",
+          show_price: true,
+          place_orders: false,
+        },
+        {
+          name: "Power Steering Fluid",
+          price: 55,
+          description: "Synthetic, 1L",
+          show_price: false,
+          place_orders: false,
+        },
+        {
+          name: "Engine Oil Filter",
+          price: 35,
+          description: "Premium quality",
+          show_price: false,
+          place_orders: false,
+        },
+        {
+          name: "Air Filter",
+          price: 45,
+          description: "High performance",
+          show_price: false,
+          place_orders: false,
+        },
+      ]);
+    }
+
+    /* ==========================
+       CATEGORIES
+    ========================== */
+    function displayCategories(categories) {
+      const container = document.getElementById("categoriesContainer");
+      if (!container) return;
+
+      container.innerHTML = (categories || [])
+        .map((category) => {
+          const name = safeText(category.name || "{% trans 'Engine Oils' %}");
+          const image = category.image
+            ? toAbsUrl(safeText(category.image))
+            : "";
+          const id = safeText(category.id || "1");
+
+          return `
+            <div class="col-lg-4 col-md-6">
+              <div class="category-card">
+                ${
+                  image
+                    ? `<img src="${image}" alt="${name}" class="category-img" loading="lazy" decoding="async">`
+                    : `<div class="h-100 d-flex align-items-center justify-content-center bg-light">
+                        <i class="fas fa-tag text-muted fa-2x" aria-hidden="true"></i>
+                      </div>`
+                }
+                <div class="category-overlay">
+                  <h5 class="mb-0">${name}</h5>
+                </div>
+                <a href="/products/?category=${id}" class="stretched-link" aria-label="${name}"></a>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function showSampleCategories() {
+      displayCategories([
+        { name: '{% trans "Engine Oils" %}' },
+        { name: '{% trans "Transmission Fluids" %}' },
+        { name: '{% trans "Brake Fluids" %}' },
+        { name: '{% trans "Coolants" %}' },
+        { name: '{% trans "Filters" %}' },
+        { name: '{% trans "Greases" %}' },
+      ]);
+    }
+
+    /* ==========================
+       BRANDS
+    ========================== */
+    function displayBrands(brands) {
+      const container = document.getElementById("brandsContainer");
+      if (!container) return;
+
+      container.innerHTML = (brands || [])
+        .map((brand) => {
+          const name = safeText(brand.name || "");
+          const image = brand.image ? toAbsUrl(safeText(brand.image)) : "";
+
+          return `
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+              <div class="brand-card" title="${name}">
+                ${
+                  image
+                    ? `<img src="${image}" alt="${name}" class="brand-img" loading="lazy" decoding="async">`
+                    : `<div class="text-center">
+                        <i class="fas fa-tag text-muted fa-2x mb-2" aria-hidden="true"></i>
+                        <h6 class="mb-0 text-muted">${name || "{% trans 'Brand' %}"}</h6>
+                      </div>`
+                }
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function showSampleBrands() {
+      displayBrands([
+        { name: "Sika" },
+        { name: "Mapei" },
+        { name: "Knauf" },
+        { name: "Jotun" },
+        { name: "AlMadina Misurata" },
+        { name: "LISCO" },
+      ]);
+    }
+
+    function renderFallbacks() {
+      const productsContainer = document.getElementById("productsContainer");
+      if (productsContainer) {
+        productsContainer.innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-info text-center">
+              <i class="fas fa-info-circle mx-2" aria-hidden="true"></i>
+              {% trans "Products will be available soon. Please check back later." %}
+            </div>
+          </div>
+        `;
+      }
+      hideBanners();
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,517 @@
+{% extends 'main/base.html' %} {% load static i18n %}
+
+<!-- prettier-ignore -->
+{% block title %}
+{% trans "About Us - Altaj Aldaim" %}
+{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+  <!-- =========================================================
+    HERO (Home-like)
+  ========================================================= -->
+  <section class="hero-landing position-relative overflow-hidden hero-about">
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="container-full">
+      <div class="row align-items-center py-5 min-vh-60">
+        <div class="col-lg-7" data-aos="fade-right">
+          <h1 class="display-4 fw-bold mb-3 text-white">
+            {% trans "About Silam Al-Wusool" %}
+          </h1>
+
+          <!-- prettier-ignore -->
+          <p class="lead mb-4 hero-subtitle">
+            {% blocktrans %}
+            We specialize in importing premium building materials, structural components, and finishing supplies—combined with reliable logistics support to keep your construction projects on track.
+            {% endblocktrans %}
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#story" class="btn btn-light btn-lg px-5">
+              <i class="fas fa-book-open mx-2" aria-hidden="true"></i>
+              {% trans "Our Story" %}
+            </a>
+            <a
+              href="{% url 'contact' %}"
+              class="btn btn-outline-light btn-lg px-5"
+            >
+              <i class="fas fa-headset mx-2" aria-hidden="true"></i>
+              {% trans "Get a Quote" %}
+            </a>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <div class="stat-pill">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">{% trans "Certified Materials" %}</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">24/7</span>
+              <span class="stat-label">{% trans "Procurement Support" %}</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num">Fast</span>
+              <span class="stat-label">{% trans "Site Delivery" %}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5" data-aos="fade-left">
+          <div class="hero-media text-center">
+            <img
+              src="{% static 'main/img/clean-logo.png' %}"
+              alt="{% trans 'Premium Building Materials' %}"
+              class="img-fluid hero-img"
+              loading="eager"
+              decoding="async"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=900&q=80';
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    STORY
+  ========================================================= -->
+  <section id="story" class="py-5 px-5">
+    <div class="container-full">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="fw-bold mb-3">{% trans "Our Story" %}</h2>
+
+          <!-- prettier-ignore -->
+          <p class="text-muted mb-3">
+            {% blocktrans %}
+            Silam Al-Wusool was founded to provide the construction sector with a reliable source of premium building materials. We focus on importing high-quality steel, cement, timber, and finishing materials that match strict engineering standards—so contractors and developers can build safely and efficiently.
+            {% endblocktrans %}
+          </p>
+
+          <!-- prettier-ignore -->
+          <p class="text-muted mb-0">
+            {% blocktrans %}
+            Over time, we expanded our services to include comprehensive logistics and sourcing solutions: helping clients select the right materials, navigate international standards, and plan project shipments—backed by consistent availability and dependable site delivery.
+            {% endblocktrans %}
+          </p>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card-elev p-4">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="info-row">
+                  <div class="info-ico bg-primary-subtle text-primary">
+                    <i class="fas fa-certificate" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <h6 class="mb-1 fw-bold">
+                      {% trans "Quality & Authenticity" %}
+                    </h6>
+                    <!-- prettier-ignore -->
+                    <p class="mb-0 text-muted">
+                      {% blocktrans %}
+                      We source certified materials from trusted global manufacturers—ensuring structural integrity and top performance for every project.
+                      {% endblocktrans %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="info-row">
+                  <div class="info-ico bg-success-subtle text-success">
+                    <i class="fas fa-drafting-compass" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <h6 class="mb-1 fw-bold">
+                      {% trans "Technical Sourcing" %}
+                    </h6>
+                    <!-- prettier-ignore -->
+                    <p class="mb-0 text-muted">
+                      {% blocktrans %}
+                      Expert recommendations for material specifications, grades, and quantities—tailored to your specific project requirements.
+                      {% endblocktrans %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="info-row">
+                  <div class="info-ico bg-warning-subtle text-warning">
+                    <i class="fas fa-truck-loading" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <h6 class="mb-1 fw-bold">
+                      {% trans "Availability & Delivery" %}
+                    </h6>
+                    <!-- prettier-ignore -->
+                    <p class="mb-0 text-muted">
+                      {% blocktrans %}
+                      Fast and secure delivery directly to construction sites—ensuring your materials arrive on schedule.
+                      {% endblocktrans %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    MISSION / VISION
+  ========================================================= -->
+  <section class="py-5 px-5 bg-dynamic">
+    <div class="container-full">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="display-6 fw-bold mb-2 text-white">
+          {% trans "Mission & Vision" %}
+        </h2>
+        <p class="text-white-50 mb-0">
+          {% trans "Quality, durability, and reliable procurement." %}
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6" data-aos="fade-up">
+          <div class="card-elev h-100 p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="feature-icon-sm bg-primary text-white">
+                <i class="fas fa-bullseye" aria-hidden="true"></i>
+              </div>
+              <h3 class="fw-bold mb-0">{% trans "Our Mission" %}</h3>
+            </div>
+
+            <!-- prettier-ignore -->
+            <p class="text-muted mb-3">
+              {% blocktrans %}
+              To deliver premium building materials and construction supplies—supported by expert sourcing and dependable logistics—so every project is built on a solid foundation.
+              {% endblocktrans %}
+            </p>
+
+            <ul class="list-unstyled text-muted mb-0">
+              <li class="mb-2">
+                <i
+                  class="fas fa-check-circle text-success mx-2"
+                  aria-hidden="true"
+                ></i>
+                {% trans "Certified materials & global brands" %}
+              </li>
+              <li class="mb-2">
+                <i
+                  class="fas fa-check-circle text-success mx-2"
+                  aria-hidden="true"
+                ></i>
+                {% trans "Strict adherence to engineering specs" %}
+              </li>
+              <li>
+                <i
+                  class="fas fa-check-circle text-success mx-2"
+                  aria-hidden="true"
+                ></i>
+                {% trans "Reliable supply chain for contractors" %}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-elev h-100 p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="feature-icon-sm bg-warning text-white">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </div>
+              <h3 class="fw-bold mb-0">{% trans "Our Vision" %}</h3>
+            </div>
+
+            <!-- prettier-ignore -->
+            <p class="text-muted mb-3">
+              {% blocktrans %}
+              To be the leading importer of building materials—recognized for quality, industry expertise, and a steadfast commitment to client success.
+              {% endblocktrans %}
+            </p>
+
+            <ul class="list-unstyled text-muted mb-0">
+              <li class="mb-2">
+                <i class="fas fa-star text-warning mx-2" aria-hidden="true"></i>
+                {% trans "Streamlined procurement and fast response" %}
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-star text-warning mx-2" aria-hidden="true"></i>
+                {% trans "A wider range of construction materials" %}
+              </li>
+              <li>
+                <i class="fas fa-star text-warning mx-2" aria-hidden="true"></i>
+                {% trans "Stronger partnerships with builders and developers" %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    WHAT WE OFFER
+  ========================================================= -->
+  <section class="py-5 px-5">
+    <div class="container-full">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="display-5 fw-bold mb-3">{% trans "What We Offer" %}</h2>
+
+        <!-- prettier-ignore -->
+        <p class="lead text-muted">
+          {% blocktrans %}
+          Top-grade building materials and supplies—plus expert procurement and logistical support to meet your project demands.
+          {% endblocktrans %}
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card-elev h-100 p-4 text-center">
+            <div
+              class="feature-icon bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i class="fas fa-cubes fa-2x text-white" aria-hidden="true"></i>
+            </div>
+            <h5 class="fw-bold mb-2">{% trans "Structural Materials" %}</h5>
+
+            <!-- prettier-ignore -->
+            <p class="text-muted mb-0">
+              {% blocktrans %}
+              High-tensile steel, premium cement, and durable concrete blocks—engineered for foundational strength and safety.
+              {% endblocktrans %}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-elev h-100 p-4 text-center">
+            <div
+              class="feature-icon bg-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i
+                class="fas fa-paint-roller fa-2x text-white"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <h5 class="fw-bold mb-2">{% trans "Finishing & Supplies" %}</h5>
+
+            <!-- prettier-ignore -->
+            <p class="text-muted mb-0">
+              {% blocktrans %}
+              Top-quality tiles, timber, paints, and insulation—selected for aesthetic appeal and long-lasting durability.
+              {% endblocktrans %}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-elev h-100 p-4 text-center">
+            <div
+              class="feature-icon bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            >
+              <i class="fas fa-pallet fa-2x text-white" aria-hidden="true"></i>
+            </div>
+            <h5 class="fw-bold mb-2">{% trans "Logistics & Procurement" %}</h5>
+
+            <!-- prettier-ignore -->
+            <p class="text-muted mb-0">
+              {% blocktrans %}
+              End-to-end supply chain solutions, custom material sourcing, and coordinated site deliveries to keep your builds on schedule.
+              {% endblocktrans %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    CTA (Home-like)
+  ========================================================= -->
+  <section class="py-5 px-5 bg-primary text-white">
+    <div class="container-full">
+      <div class="row align-items-center">
+        <div class="col-lg-8" data-aos="fade-right">
+          <h2 class="display-6 fw-bold mb-2">
+            {% trans "Need Help Sourcing Building Materials?" %}
+          </h2>
+
+          <!-- prettier-ignore -->
+          <p class="lead mb-0">
+            {% blocktrans %}
+            Share your project requirements with us, and our procurement team will source the best materials for maximum durability and value.
+            {% endblocktrans %}
+          </p>
+        </div>
+
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
+          <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5">
+            <i class="fas fa-headset mx-2" aria-hidden="true"></i>
+            {% trans "Contact Us" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .landing-page {
+    overflow-x: hidden;
+  }
+
+  /* Hero similar to Home */
+  .hero-landing {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-light) 100%
+    );
+    color: #fff;
+    position: relative;
+    padding: 2rem 6rem;
+    isolation: isolate;
+  }
+  .hero-about .min-vh-60 {
+    min-height: 60vh;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(255, 255, 255, 0.12),
+        transparent 45%
+      ),
+      rgba(0, 0, 0, 0.35);
+    z-index: 0;
+  }
+  .hero-landing .container-full {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-subtitle {
+    max-width: 60ch;
+  }
+
+  .hero-media {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 14px;
+    backdrop-filter: blur(6px);
+  }
+  .hero-img {
+    border-radius: 14px;
+    max-height: 360px;
+    width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
+  }
+
+  /* Stat pills */
+  .stat-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .stat-num {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+  .stat-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+  }
+
+  /* Card style from Home */
+  .card-elev {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fff;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+    height: 100%;
+  }
+  .card-elev:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon-sm {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .info-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero-landing {
+      padding: 4rem 1rem;
+    }
+    .hero-about .min-vh-60 {
+      min-height: auto;
+    }
+    .display-4 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.AOS) {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        disable: window.innerWidth < 768,
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,807 @@
+{% extends 'main/base.html' %} {% load i18n %}
+
+<!-- prettier-ignore -->
+{% block title %}
+{% trans "Contact Us - Altaj Aldaim" %}
+{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+  <!-- =========================================================
+    HERO (Home-like)
+  ========================================================= -->
+  <section class="hero-landing position-relative overflow-hidden contact-hero">
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="container-full">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center py-5" data-aos="fade-up">
+          <h1 class="display-5 fw-bold mb-4 text-white">
+            {% trans "Get In Touch" %}
+          </h1>
+
+          <!-- prettier-ignore -->
+          <p class="lead mb-0 hero-subtitle mx-auto">
+            {% blocktrans %}
+            Have a question about our building materials, structural components, or logistics services?
+            Send us a message and our procurement team will respond as soon as possible.
+            {% endblocktrans %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    CONTACT FORM + INFO
+  ========================================================= -->
+  <section class="py-5 px-5 section-surface">
+    <div class="container-full">
+      <div class="row g-5">
+        <!-- Contact Form -->
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="card-elev p-4 p-md-5 h-100">
+            <h3 class="fw-bold mb-4">
+              <i
+                class="fas fa-paper-plane mx-2 text-primary"
+                aria-hidden="true"
+              ></i>
+              {% trans "Send Us a Message" %}
+            </h3>
+
+            <form method="POST" id="contactForm">
+              {% csrf_token %} {% if messages %}
+              <div class="alert alert-success" role="alert">
+                {% for message in messages %}
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-check-circle mx-2" aria-hidden="true"></i>
+                  {{ message }}
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div class="mb-4">
+                <label for="email" class="form-label fw-semibold">
+                  {% trans "Email Address" %}
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text section-alt border-end-0">
+                    <i
+                      class="fas fa-envelope text-muted"
+                      aria-hidden="true"
+                    ></i>
+                  </span>
+                  <input
+                    type="email"
+                    class="form-control border-start-0"
+                    id="email"
+                    name="email"
+                    placeholder="{% trans 'your.email@example.com' %}"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="message" class="form-label fw-semibold">
+                  {% trans "Your Message" %}
+                </label>
+                <div class="input-group">
+                  <span
+                    class="input-group-text section-alt align-items-start border-end-0 pt-3"
+                  >
+                    <i class="fas fa-comment text-muted" aria-hidden="true"></i>
+                  </span>
+                  <textarea
+                    class="form-control border-start-0"
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="{% trans 'Tell us about your project requirements, material types, and quantities needed...' %}"
+                    required
+                  ></textarea>
+                </div>
+
+                <!-- prettier-ignore -->
+                <p class="small text-muted mt-2 mb-0">
+                  {% blocktrans %}
+                  Tip: Include your project scale, required specifications (e.g., high-tensile steel, premium cement), and estimated timelines for faster recommendations.
+                  {% endblocktrans %}
+                </p>
+              </div>
+
+              <div class="d-grid">
+                <button
+                  class="btn btn-primary-modern btn-lg btn-modern"
+                  type="submit"
+                  id="submitBtn"
+                >
+                  <i class="fas fa-paper-plane mx-2" aria-hidden="true"></i>
+                  {% trans "Send Message" %}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card-elev p-4 p-md-5 h-100">
+            <h3 class="fw-bold mb-4">
+              <i
+                class="fas fa-info-circle mx-2 text-primary"
+                aria-hidden="true"
+              ></i>
+              {% trans "Contact Information" %}
+            </h3>
+
+            <div class="contact-info">
+              <div class="contact-item d-flex mb-4">
+                <div
+                  class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-3"
+                >
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h6 class="fw-semibold mb-1">{% trans "Main Location" %}</h6>
+                  <p class="text-muted mb-0" id="contactAddress">
+                    {% trans "Loading address from primary branch..." %}
+                  </p>
+                </div>
+              </div>
+
+              <div class="contact-item d-flex mb-4">
+                <div
+                  class="contact-icon bg-success text-white rounded-circle d-flex align-items-center justify-content-center mx-3"
+                >
+                  <i class="fas fa-phone" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h6 class="fw-semibold mb-1">{% trans "Phone Number" %}</h6>
+                  <p class="text-muted mb-0" id="contactPhone">
+                    {% trans "Loading phone number..." %}
+                  </p>
+                </div>
+              </div>
+
+              <div class="contact-item d-flex mb-4">
+                <div
+                  class="contact-icon bg-warning text-white rounded-circle d-flex align-items-center justify-content-center mx-3"
+                >
+                  <i class="fas fa-envelope" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h6 class="fw-semibold mb-1">{% trans "Email Address" %}</h6>
+                  <p class="text-muted mb-0" id="contactEmail">
+                    {% trans "Loading email address..." %}
+                  </p>
+                </div>
+              </div>
+
+              <div class="contact-item d-flex">
+                <div
+                  class="contact-icon bg-info text-white rounded-circle d-flex align-items-center justify-content-center mx-3"
+                >
+                  <i class="fas fa-clock" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h6 class="fw-semibold mb-1">{% trans "Business Hours" %}</h6>
+                  <p class="text-muted mb-0" id="contactHours">
+                    {% trans "Loading business hours..." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="social-links">
+              <h6 class="fw-semibold mb-3">{% trans "Follow Us" %}</h6>
+              <div class="d-flex gap-3">
+                <a
+                  id="contactFacebook"
+                  href="#"
+                  class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                  aria-label="{% trans 'Facebook' %}"
+                >
+                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a
+                  id="contactTwitter"
+                  href="#"
+                  class="social-link bg-info text-white rounded-circle d-flex align-items-center justify-content-center"
+                  aria-label="{% trans 'Twitter' %}"
+                >
+                  <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a
+                  id="contactLinkedin"
+                  href="#"
+                  class="social-link bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                  aria-label="{% trans 'LinkedIn' %}"
+                >
+                  <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+                <a
+                  id="contactInstagram"
+                  href="#"
+                  class="social-link bg-danger text-white rounded-circle d-flex align-items-center justify-content-center"
+                  aria-label="{% trans 'Instagram' %}"
+                >
+                  <i class="fab fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-4 p-3 rounded-3 bg-light">
+              <!-- prettier-ignore -->
+              <p class="mb-0 small text-muted">
+                {% blocktrans %}
+                For contractors and bulk buyers: mention your monthly quantities and the specific building materials you need, and we will reply with availability, pricing, and delivery options.
+                {% endblocktrans %}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+    BRANCHES
+  ========================================================= -->
+  <section class="py-5 px-5 section-alt">
+    <div class="container-full">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="display-6 fw-bold mb-3">{% trans "Our Branches" %}</h2>
+
+        <!-- prettier-ignore -->
+        <p class="lead text-muted">
+          {% blocktrans %}
+          Visit any of our locations to discuss your construction needs and explore our premium material offerings.
+          {% endblocktrans %}
+        </p>
+      </div>
+
+      <div class="row g-4" id="branches-container">
+        <div class="col-12 text-center py-5" id="loading-branches">
+          <div class="loading-spinner-large mb-3"></div>
+          <p class="text-muted">{% trans "Loading branches..." %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Branch Detail Modal -->
+<div class="modal fade" id="branchModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content modern-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="branchModalTitle"></h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <p>
+              <strong>{% trans "Name" %}:</strong>
+              <span id="branchDetailName"></span>
+            </p>
+            <p>
+              <strong>{% trans "Address" %}:</strong>
+              <span id="branchDetailAddress"></span>
+            </p>
+            <p>
+              <strong>{% trans "Phone" %}:</strong>
+              <span id="branchDetailPhone"></span>
+            </p>
+            <p>
+              <strong>{% trans "Hours" %}:</strong>
+              <span id="branchDetailHours"></span>
+            </p>
+            <p>
+              <strong>{% trans "Email" %}:</strong>
+              <span id="branchDetailEmail"></span>
+            </p>
+            <p>
+              <strong>{% trans "Coordinates" %}:</strong>
+              <span id="branchDetailCoordinates"></span>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div id="branchDetailMap" style="height: 300px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+  // Global variables
+  let branchMaps = {};
+  let branchMarkers = {};
+  let allBranches = [];
+
+  function setContactInfoFromBranches(branches) {
+    if (!branches || !branches.length) return;
+
+    let primary =
+      branches.find((b) => b.primery_branch === true) || branches[0];
+
+    const addressEl = document.getElementById("contactAddress");
+    const phoneEl = document.getElementById("contactPhone");
+    const emailEl = document.getElementById("contactEmail");
+    const hoursEl = document.getElementById("contactHours");
+
+    if (addressEl) {
+      addressEl.textContent =
+        primary.address || "{% trans 'Address not set' %}";
+    }
+
+    if (phoneEl) {
+      phoneEl.textContent =
+        primary.phone_number || "{% trans 'Phone number not set' %}";
+    }
+
+    if (emailEl) {
+      emailEl.textContent =
+        primary.Email_Adress || "{% trans 'Email not set' %}";
+    }
+
+    if (hoursEl) {
+      const dayFrom = primary.day_from || "";
+      const dayTo = primary.day_to || "";
+      const open = primary.opening_hours || "";
+      const close = primary.closing_hours || "";
+
+      let hoursText = "";
+
+      if (dayFrom || dayTo) {
+        hoursText += dayFrom;
+        if (dayTo) hoursText += dayFrom ? ` - ${dayTo}` : dayTo;
+      }
+
+      if (open || close) {
+        if (hoursText) hoursText += ": ";
+        hoursText += open;
+        if (close) hoursText += open ? ` - ${close}` : close;
+      }
+
+      if (!hoursText) {
+        hoursText = "{% trans 'Business hours not set' %}";
+      }
+
+      hoursEl.textContent = hoursText;
+    }
+
+    // Social
+    const fbEl = document.getElementById("contactFacebook");
+    if (fbEl && primary.facbook_link) fbEl.href = primary.facbook_link || "#";
+
+    const twEl = document.getElementById("contactTwitter");
+    if (twEl && primary.twitter_link) twEl.href = primary.twitter_link || "#";
+
+    const lnEl = document.getElementById("contactLinkedin");
+    if (lnEl && primary.linkdin_link) lnEl.href = primary.linkdin_link || "#";
+
+    const igEl = document.getElementById("contactInstagram");
+    if (igEl && primary.instagram_link)
+      igEl.href = primary.instagram_link || "#";
+  }
+
+  async function loadBranches() {
+    try {
+      const response = await fetch("{% url 'branch-list-api' %}");
+      let branches = await response.json();
+      allBranches = branches;
+
+      setContactInfoFromBranches(branches);
+
+      if (!branches.length) {
+        document.getElementById("branches-container").innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="fas fa-store-alt fa-3x text-muted mb-3" aria-hidden="true"></i>
+            <h5 class="text-muted">{% trans "No branches available" %}</h5>
+            <p class="text-muted">{% trans "Check back later for branch information." %}</p>
+          </div>
+        `;
+        return;
+      }
+
+      const validBranches = branches
+        .map((b) => {
+          const lat = parseFloat(b.latitude);
+          const lng = parseFloat(b.longitude);
+
+          if (
+            !isNaN(lat) &&
+            !isNaN(lng) &&
+            lat >= -90 &&
+            lat <= 90 &&
+            lng >= -180 &&
+            lng <= 180
+          ) {
+            let hoursText = "";
+
+            if (b.day_from || b.day_to) {
+              hoursText += b.day_from || "";
+              if (b.day_to)
+                hoursText += b.day_from ? ` - ${b.day_to}` : b.day_to;
+            }
+
+            if (b.opening_hours || b.closing_hours) {
+              if (hoursText) hoursText += ": ";
+              hoursText += b.opening_hours || "";
+              if (b.closing_hours) {
+                hoursText += b.opening_hours
+                  ? ` - ${b.closing_hours}`
+                  : b.closing_hours;
+              }
+            }
+
+            if (!hoursText) hoursText = "{% trans 'Business hours not set' %}";
+
+            return {
+              id: b.id,
+              lat,
+              lng,
+              name: b.name || "{% trans 'Branch' %}",
+              address: b.address || "{% trans 'Address not set' %}",
+              phone: b.phone_number || "{% trans 'Phone number not set' %}",
+              hours: hoursText,
+              email: b.Email_Adress || "{% trans 'Email not set' %}",
+              primery_branch: b.primery_branch || false,
+            };
+          }
+
+          return null;
+        })
+        .filter(Boolean);
+
+      if (!validBranches.length) {
+        document.getElementById("branches-container").innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3" aria-hidden="true"></i>
+            <h5 class="text-muted">{% trans "No valid branch locations" %}</h5>
+            <p class="text-muted">{% trans "Please check branch coordinate data." %}</p>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById("loading-branches").remove();
+
+      const branchesContainer = document.getElementById("branches-container");
+
+      validBranches.forEach((branch, index) => {
+        const branchCard = document.createElement("div");
+        branchCard.className = "col-lg-4 col-md-6";
+        branchCard.setAttribute("data-aos", "fade-up");
+        branchCard.setAttribute("data-aos-delay", (index * 100).toString());
+
+        branchCard.innerHTML = `
+          <div class="branch-card card-elev h-100">
+            <div class="branch-map" id="branch-map-${branch.id}"></div>
+            <div class="branch-content p-4">
+              <h5 class="fw-bold mb-2">${branch.name}</h5>
+              <p class="text-muted mb-3">${branch.address}</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                  <i class="fas fa-map-pin mx-1" aria-hidden="true"></i>
+                  ${branch.lat.toFixed(4)}, ${branch.lng.toFixed(4)}
+                </small>
+                <button class="btn btn-outline-primary btn-sm" onclick="showBranchDetails(${branch.id})">
+                  <i class="fas fa-info-circle mx-1" aria-hidden="true"></i>
+                  {% trans "Details" %}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        branchesContainer.appendChild(branchCard);
+        setTimeout(() => initBranchMap(branch), 100);
+      });
+    } catch (error) {
+      console.error("Error loading branches:", error);
+      document.getElementById("branches-container").innerHTML = `
+        <div class="col-12 text-center py-5">
+          <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3" aria-hidden="true"></i>
+          <h5 class="text-muted">{% trans "Error loading branches" %}</h5>
+          <p class="text-muted">{% trans "Please try refreshing the page." %}</p>
+        </div>
+      `;
+    }
+  }
+
+  function initBranchMap(branch) {
+    const mapElement = document.getElementById(`branch-map-${branch.id}`);
+    if (!mapElement) return;
+
+    const map = new google.maps.Map(mapElement, {
+      zoom: 15,
+      center: { lat: branch.lat, lng: branch.lng },
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      styles: [
+        {
+          featureType: "all",
+          elementType: "geometry",
+          stylers: [{ color: "#f5f5f5" }],
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#c5e1f6" }],
+        },
+      ],
+    });
+
+    const marker = new google.maps.Marker({
+      position: { lat: branch.lat, lng: branch.lng },
+      map: map,
+      title: branch.name,
+      animation: google.maps.Animation.DROP,
+    });
+
+    branchMaps[branch.id] = map;
+    branchMarkers[branch.id] = marker;
+  }
+
+  function showBranchDetails(branchId) {
+    const branch = getBranchById(branchId);
+    if (!branch) return;
+
+    document.getElementById("branchModalTitle").innerHTML = `
+      <i class="fas fa-map-marker-alt mx-2" aria-hidden="true"></i>${branch.name}
+    `;
+    document.getElementById("branchDetailName").textContent = branch.name;
+    document.getElementById("branchDetailAddress").textContent = branch.address;
+    document.getElementById("branchDetailPhone").textContent = branch.phone;
+    document.getElementById("branchDetailHours").textContent = branch.hours;
+    document.getElementById("branchDetailEmail").textContent = branch.email;
+    document.getElementById("branchDetailCoordinates").textContent =
+      `${branch.lat.toFixed(6)}, ${branch.lng.toFixed(6)}`;
+
+    setTimeout(() => initDetailMap(branch), 100);
+
+    const branchModal = new bootstrap.Modal(
+      document.getElementById("branchModal"),
+    );
+    branchModal.show();
+  }
+
+  function getBranchById(branchId) {
+    const b = allBranches.find((x) => x.id === branchId);
+    if (!b) return null;
+
+    const lat = parseFloat(b.latitude);
+    const lng = parseFloat(b.longitude);
+
+    let hoursText = "";
+    if (b.day_from || b.day_to) {
+      hoursText += b.day_from || "";
+      if (b.day_to) hoursText += b.day_from ? ` - ${b.day_to}` : b.day_to;
+    }
+    if (b.opening_hours || b.closing_hours) {
+      if (hoursText) hoursText += ": ";
+      hoursText += b.opening_hours || "";
+      if (b.closing_hours)
+        hoursText += b.opening_hours
+          ? ` - ${b.closing_hours}`
+          : b.closing_hours;
+    }
+    if (!hoursText) hoursText = "{% trans 'Business hours not set' %}";
+
+    return {
+      id: b.id,
+      name: b.name || "{% trans 'Branch' %}",
+      address: b.address || "{% trans 'Address not set' %}",
+      lat: lat,
+      lng: lng,
+      phone: b.phone_number || "{% trans 'Phone number not set' %}",
+      hours: hoursText,
+      email: b.Email_Adress || "{% trans 'Email not set' %}",
+    };
+  }
+
+  function initDetailMap(branch) {
+    const mapElement = document.getElementById("branchDetailMap");
+    if (!mapElement) return;
+
+    mapElement.innerHTML = "";
+
+    const map = new google.maps.Map(mapElement, {
+      zoom: 16,
+      center: { lat: branch.lat, lng: branch.lng },
+      mapTypeControl: true,
+      streetViewControl: true,
+      fullscreenControl: true,
+    });
+
+    const marker = new google.maps.Marker({
+      position: { lat: branch.lat, lng: branch.lng },
+      map: map,
+      title: branch.name,
+      animation: google.maps.Animation.BOUNCE,
+    });
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: `
+        <div class="p-2">
+          <h6 class="fw-bold mb-1">${branch.name}</h6>
+          <p class="mb-0 small">${branch.address}</p>
+        </div>
+      `,
+    });
+
+    marker.addListener("click", () => infoWindow.open(map, marker));
+    setTimeout(() => infoWindow.open(map, marker), 500);
+  }
+
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", function () {
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.innerHTML =
+        '<div class="loading-spinner mx-2"></div>{% trans "Sending..." %}';
+      submitBtn.disabled = true;
+    });
+
+  function initMap() {
+    loadBranches();
+  }
+
+  document
+    .getElementById("branchModal")
+    .addEventListener("hidden.bs.modal", function () {
+      const mapElement = document.getElementById("branchDetailMap");
+      if (mapElement) mapElement.innerHTML = "";
+    });
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArwI9jJAXm0u75YnXMTTq6v0CpVkqQRP0&callback=initMap"></script>
+
+<style>
+  .landing-page {
+    overflow-x: hidden;
+  }
+
+  /* Hero matches Home */
+  .hero-landing {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-light) 100%
+    );
+    color: #fff;
+    position: relative;
+    padding: 2rem 6rem;
+    isolation: isolate;
+  }
+  .contact-hero {
+    margin-top: 0 !important;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(255, 255, 255, 0.12),
+        transparent 45%
+      ),
+      rgba(0, 0, 0, 0.35);
+    z-index: 0;
+  }
+  .hero-landing .container-full {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-subtitle {
+    max-width: 65ch;
+  }
+
+  /* Cards consistent with Home */
+  .card-elev {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fff;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .card-elev:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  .social-link:hover {
+    transform: translateY(-3px);
+  }
+
+  .branch-card {
+    overflow: hidden;
+  }
+  .branch-map {
+    height: 200px;
+    width: 100%;
+    border-bottom: 1px solid var(--card-border-color);
+  }
+  .branch-content {
+    flex: 1;
+  }
+
+  .loading-spinner-large {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .input-group:focus-within {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    border-radius: 8px;
+  }
+  .input-group:focus-within .input-group-text {
+    border-color: var(--primary);
+  }
+  .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .hero-landing {
+      padding: 4rem 1rem;
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+    }
+    .branch-map {
+      height: 180px;
+    }
+    #branchDetailMap {
+      height: 250px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+{% endblock %}

@@ -1,9 +1,9 @@
 version: '3.3'
 
 services:
-  silam_alwusool:
+  crystal:
     build: .
-    container_name: silam_alwusool_container
+    container_name: golden_crystal_container
     command: python manage.py runserver 0.0.0.0:8000  # Use Django's dev server
     volumes:
       - .:/app  # Mount local code into the container

@@ -17,9 +17,9 @@ from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-WEBSITE_NAME = "SILAM AL-WUSOOL LTD."
-WEBSITE_NAME_AR = "سلم الوصول"
-WEBSITE_DESCRIPTION = "شركة سلم الوصول لاستيراد مواد البناء"
+WEBSITE_NAME = "Golden Crystal LTD."
+WEBSITE_NAME_AR = "شركة كريستال الذهبية المحدودة"
+WEBSITE_DESCRIPTION = "شركة كريستال الذهبية المحدودة متخصصة في استيراد وتوريد المنتجات المنزلية والأجهزة الكهربائية، وتسعى إلى توفير منتجات عالية الجودة من علامات تجارية موثوقة، مع تقديم خيارات متنوعة وأسعار تنافسية وخدمات توريد موثوقة لتلبية احتياجات الأفراد والشركات في جميع أنحاء ليبيا."
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -33,15 +33,15 @@ handler404 = 'main.views.t404_view'
 
 
 ALLOWED_HOSTS = [
-    '102.203.200.208',
-    'silam-alwusool.ly',
-    'www.silam-alwusool.ly',
+    '102.203.202.32',
+    'golden-crystal.com.ly',
+    'www.golden-crystal.com.ly',
     ".trycloudflare.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://silam-alwusool.ly",
-    "https://www.silam-alwusool.ly",
+    "https://golden-crystal.com.ly",
+    "https://www.golden-crystal.com.ly",
 ]
 
 # Application definition
@@ -55,8 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'rest_framework',
-
-
 ]
 
 MIDDLEWARE = [

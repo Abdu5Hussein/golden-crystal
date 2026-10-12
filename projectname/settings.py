@@ -33,12 +33,16 @@ handler404 = 'main.views.t404_view'
 
 
 ALLOWED_HOSTS = [
-    '192.168.0.37',
-    '127.0.0.1',
-    '192.168.205.117',
+    '102.203.200.208',
+    'silam-alwusool.ly',
+    'www.silam-alwusool.ly',
     ".trycloudflare.com",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://silam-alwusool.ly",
+    "https://www.silam-alwusool.ly",
+]
 
 # Application definition
 
